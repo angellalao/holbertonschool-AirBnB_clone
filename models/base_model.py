@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module with class Base"""
+"""Module with class BaseModel"""
 
 import json
 import uuid
