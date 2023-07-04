@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 
 
-class Base:
+class BaseModel:
     """Defines all common attributes/methods for other classes"""
 
     def __init__(self):
@@ -25,8 +25,6 @@ class Base:
 
     def to_dict(self):
         """Returns the dictionary representation of an instance """
-        return {
-            "id": self.id,
-            "created_at": self.created_at.isoformat(),
-            "updated_at": self.updated_at.isoformat(),
-            }
+        new_dict = self.__dict__.copy()
+        new_dict["__class__"] = type(self).__name__
+        return new_dict
