@@ -9,7 +9,7 @@ from datetime import datetime
 class Base:
     """Defines all common attributes/methods for other classes"""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initialize class attibutes"""
         self.id = uuid.uuid4()
         self.created_at = datetime.now()
