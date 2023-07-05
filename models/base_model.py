@@ -23,13 +23,12 @@ class BaseModel:
                 else:
                     if k != "__class__":
                         setattr(self, k, v)
-
         else:
             pass
             
     def __str__(self):
         """Prints formatted string"""
-        return (f"[{type(self)}] ({self.id}) {self.to_dict()}")
+        return (f"[{type(self).__name__}] ({self.id}) {self.to_dict()}")
 
     def save(self):
         """Updates instance attribute updated_at with current datetime"""
