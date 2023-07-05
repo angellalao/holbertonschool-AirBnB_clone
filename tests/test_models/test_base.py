@@ -50,3 +50,8 @@ class TestBaseModel(unittest.TestCase):
         """Test that to_dict modifies updated_at to isoformat"""
         new_dict = self.b1.to_dict()
         self.assertEqual(new_dict["updated_at"], self.b1.updated_at.isoformat())
+
+    def test_to_dict_sets_correct_class_name(self):
+        """Test that to_dict sets the correct class name"""
+        new_dict = self.b1.to_dict()
+        self.assertEqual(new_dict["__class__"], type(self.b1).__name__)
