@@ -8,6 +8,9 @@ class TestBaseModel(unittest.TestCase):
     def setUp(self):
         """Test that class can be instatiated"""
         self.b1 = BaseModel()
+
+    def test_is_instance(self):
+        """Test that an instance is of type BaseModel"""
         self.assertIsInstance(self.b1, BaseModel)
 
     def test_str_returns_a_string(self):
