@@ -15,6 +15,18 @@ class BaseModel:
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
+        if len(kwargs) != 0:
+            for k, v in kwargs.items():
+                if k == "created_at" or k == "updated_at":
+                    v = datetime.strptime(v, '%Y-%m-%dT%H:%M:%S.%f')
+                    setattr(self, k, v)
+                else:
+                    if k != "__class__":
+                        setattr(self, k, v)
+
+        else:
+            pass
+            
     def __str__(self):
         """Prints formatted string"""
         return (f"[{type(self)}] ({self.id}) {self.to_dict()}")
