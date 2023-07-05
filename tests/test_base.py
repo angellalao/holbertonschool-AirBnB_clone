@@ -8,5 +8,5 @@ class TestBase(unittest.TestCase):
     def test_str(self):
         """Test that it  returns a formatted string"""
         b1 = BaseModel()
-        self.assertEqual(str(b1),
-- [<class 'models.base_model.BaseModel'>] (b35598e0-62dd-4482-aabb-a2b1ea22eaad) {'id': 'b35598e0-62dd-4482-aabb-a2b1ea22eaad', 'created_at': '2023-07-03T23:21:56.213328', 'updated_at': '2023-07-03T23:21:56.213335', '__class__': 'BaseModel'})
+        expected_formatted_string = f"[{b1.__class__}] ({b1.id}) {{'id': '{b1.id}', 'created_at': '{b1.created_at.isoformat()}', 'updated_at': '{b1.updated_at.isoformat()}', '__class__': '{type(b1).__name__}'}}"
+        self.assertEqual(str(b1), expected_formatted_string)
