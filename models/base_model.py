@@ -20,7 +20,7 @@ class BaseModel:
         return (f"[{type(self)}] ({self.id}) {self.to_dict()}")
 
     def save(self):
-        """Updates public instance attribute updated_at with current datetime"""
+        """Updates instance attribute updated_at with current datetime"""
         self.updated_at = datetime.now()
 
     def to_dict(self):
