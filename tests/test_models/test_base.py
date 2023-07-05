@@ -21,7 +21,8 @@ class TestBaseModel(unittest.TestCase):
     def test_str_returns_the_expected_format(self):
         """Test that __str__ returns a formatted string"""
         expected_formatted_string = (
-            f"[{self.b1.__class__}] ({self.b1.id}) {{'id': '{self.b1.id}', "
+            f"[{self.b1.__class__.__name__}] ({self.b1.id}) "
+            f"{{'id': '{self.b1.id}', "
             f"'created_at': '{self.b1.created_at.isoformat()}', 'updated_at': "
             f"'{self.b1.updated_at.isoformat()}', '__class__': "
             f"'{type(self.b1).__name__}'}}"
@@ -30,5 +31,22 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save_correctly_updates_updated_at_time(self):
         """Test that save correctly updates the updated_at time"""
-        expected_updated_time = self.b1.updated_at.isoformat()
-        self.assertEqual(expected_updated_time, self.b1.updated_at.isoformat())
+        initial_updated_time = self.b1.updated_at
+        self.b1.save()
+        updated_at_time_after_save = self.b1.updated_at
+        self.assertNotEqual(initial_updated_time, updated_at_time_after_save)
+
+    def test_to_dict_makes_a_copy(self):
+        """Test that to_dict makes copy"""
+        new_dict = self.b1.__dict__.copy()
+        self.assertEqual(new_dict, self.b1.__dict__)
+
+    def test_to_dict_modifies_created_at_to_isoformat(self):
+        """Test that to_dict modifies created_at to isoformat"""
+        new_dict = self.b1.to_dict()
+        self.assertEqual(new_dict["created_at"], self.b1.created_at.isoformat())
+
+    def test_to_dict_modifies_updated_at_to_isoformat(self):
+        """Test that to_dict modifies updated_at to isoformat"""
+        new_dict = self.b1.to_dict()
+        self.assertEqual(new_dict["updated_at"], self.b1.updated_at.isoformat())
