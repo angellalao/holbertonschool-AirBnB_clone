@@ -31,10 +31,10 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save_correctly_updates_updated_at_time(self):
         """Test that save correctly updates the updated_at time"""
-        initial_updated_time = self.b1.updated_at
+        initial_updated_at_time = self.b1.updated_at
         self.b1.save()
         updated_at_time_after_save = self.b1.updated_at
-        self.assertNotEqual(initial_updated_time, updated_at_time_after_save)
+        self.assertNotEqual(initial_updated_at_time, updated_at_time_after_save)
 
     def test_to_dict_makes_a_copy(self):
         """Test that to_dict makes copy"""
