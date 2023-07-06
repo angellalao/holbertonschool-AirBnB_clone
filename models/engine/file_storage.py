@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """define FileStorage class"""
 import json
+import os
 
 
 class FileStorage:
@@ -34,7 +35,7 @@ class FileStorage:
                 reloaded_dict = json.load(f)
             for value in reloaded_dict.values():
                 obj_class = value["__class__"]
-                self.__objects["{}.{}".format(obj_class, value["id"])] = \
-                    eval(obj_class)(**value)
+                self.new(eval(obj_class)(**value))
+
         except:
             pass
