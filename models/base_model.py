@@ -4,17 +4,14 @@
 import json
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
     """Defines all common attributes/methods for other classes"""
 
     def __init__(self, *args, **kwargs):
-        """Initialize class attibutes"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-
+        """Initialize class BaseModel"""
         if len(kwargs) != 0:
             for k, v in kwargs.items():
                 if k == "created_at" or k == "updated_at":
@@ -24,8 +21,11 @@ class BaseModel:
                     if k != "__class__":
                         setattr(self, k, v)
         else:
-            pass
-            
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            storage.new(self)
+
     def __str__(self):
         """Prints formatted string"""
         return (f"[{type(self).__name__}] ({self.id}) {self.to_dict()}")
@@ -33,6 +33,7 @@ class BaseModel:
     def save(self):
         """Updates instance attribute updated_at with current datetime"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Returns the dictionary representation of an instance """
