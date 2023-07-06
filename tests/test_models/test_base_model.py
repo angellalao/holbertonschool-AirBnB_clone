@@ -1,7 +1,6 @@
 import unittest
 from models.base_model import BaseModel
 
-
 class TestBaseModel(unittest.TestCase):
     """Tests for the BaseModel class"""
 
@@ -26,7 +25,7 @@ class TestBaseModel(unittest.TestCase):
             f"'created_at': '{self.b1.created_at.isoformat()}', 'updated_at': "
             f"'{self.b1.updated_at.isoformat()}', '__class__': "
             f"'{type(self.b1).__name__}'}}"
-            )
+        )
         self.assertEqual(str(self.b1), expected_formatted_string)
 
     def test_save_correctly_updates_updated_at_time(self):
