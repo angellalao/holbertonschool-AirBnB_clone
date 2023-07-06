@@ -18,7 +18,7 @@ class FileStorage:
         name = type(obj).__name__
         obj_id = str(obj.id)
         key = name + "." + obj_id
-        self.__objects[key] = obj
+        self.__objects[key] = obj.to_dict()
 
 
     def save(self):
