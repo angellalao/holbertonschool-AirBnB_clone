@@ -11,3 +11,6 @@ class TestFileStorage(unittest.TestCase):
     def test_is_instance(self):
         """Test that an instance is of type FileStorage"""
         self.assertIsInstance(self.f1, FileStorage)
+
+    def test_all_return_dict_objects_is_True(self):
+        self.assertIsTrue
