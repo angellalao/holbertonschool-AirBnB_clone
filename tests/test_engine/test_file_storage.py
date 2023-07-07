@@ -1,4 +1,5 @@
 import unittest
+from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 class TestFileStorage(unittest.TestCase):
@@ -6,11 +7,8 @@ class TestFileStorage(unittest.TestCase):
 
     def setUp(self):
         """Test that class can be instatiated"""
-                self.f1 = FileStorage()
+        self.f1 = FileStorage()
 
     def test_is_instance(self):
         """Test that an instance is of type FileStorage"""
         self.assertIsInstance(self.f1, FileStorage)
-
-    def test_all_return_dict_objects_is_True(self):
-        self.assertIsTrue
