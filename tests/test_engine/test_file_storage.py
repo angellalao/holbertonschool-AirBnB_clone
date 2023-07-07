@@ -7,7 +7,7 @@ class TestFileStorage(unittest.TestCase):
 
     def setUp(self):
         """Test that class can be instatiated"""
-                self.f1 = FileStorage()
+        self.f1 = FileStorage()
 
     def test_is_instance(self):
         """Test that an instance is of type FileStorage"""
