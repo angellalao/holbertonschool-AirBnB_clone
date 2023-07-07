@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """define FileStorage class"""
 import json
+import os
 
 
 class FileStorage:
@@ -38,12 +39,10 @@ class FileStorage:
         from models.user import User
         from models.amenity import Amenity
         reloaded_dict = {}
-        try:
+        if os.path.exists(self.__file_path) is True:
             with open(self.__file_path, "r") as f:
                 reloaded_dict = json.load(f)
-        except:
-            reloaded_dict = {}
-            pass
+
         class_dict = {
             "BaseModel": BaseModel,
             "User": User,
