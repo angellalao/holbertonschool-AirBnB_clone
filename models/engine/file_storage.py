@@ -18,12 +18,15 @@ class FileStorage:
         name = type(obj).__name__
         obj_id = str(obj.id)
         key = name + "." + obj_id
-        self.__objects[key] = obj.to_dict()
+        self.__objects[key] = obj
 
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
+        json_dict = {}
+        for key in self.__objects:
+            json_dict[key] = self.__objects[key].to_dict()
         with open(self.__file_path, "w") as f:
-            json.dump(self.__objects, f)
+            json.dump(json_dict, f)
 
     def reload(self):
         """deserializes the JSON file to __objects"""
@@ -35,5 +38,5 @@ class FileStorage:
         except:
             reloaded_dict = {}
             pass
-        for key, reloaded_obj in reloaded_dict.items():
-            self.__objects[key] = BaseModel(**reloaded_obj)
+        for key, obj in reloaded_dict.items():
+            self.__objects[key] = BaseModel(**obj)
