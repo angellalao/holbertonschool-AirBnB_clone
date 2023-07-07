@@ -38,5 +38,9 @@ class FileStorage:
         except:
             reloaded_dict = {}
             pass
+        class_dict = {
+            "BaseModel": BaseModel
+        }
         for key, obj in reloaded_dict.items():
-            self.__objects[key] = BaseModel(**obj)
+            if obj.get("__class__") in class_dict.keys():
+                self.__objects[key] = class_dict[obj["__class__"]](**obj)
