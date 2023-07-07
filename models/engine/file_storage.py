@@ -39,7 +39,13 @@ class FileStorage:
             reloaded_dict = {}
             pass
         class_dict = {
-            "BaseModel": BaseModel
+            "BaseModel": BaseModel,
+            "User": User,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place,
+            "Review": Review,
         }
         for key, obj in reloaded_dict.items():
             if obj.get("__class__") in class_dict.keys():
