@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """define FileStorage class"""
 import json
-import os
 
 
 class FileStorage:
@@ -21,7 +20,6 @@ class FileStorage:
         key = name + "." + obj_id
         self.__objects[key] = obj.to_dict()
 
-
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
         json_obj = json.dumps(self.__objects)
@@ -31,12 +29,12 @@ class FileStorage:
     def reload(self):
         """deserializes the JSON file to __objects"""
         from models.base_model import BaseModel
+        reloaded_dict = {}
         try:
             with open(self.__file_path, "r") as f:
                 reloaded_dict = json.load(f)
-                self.__objects = BaseModel(reloaded_dict)
-                #self.__objects = json.load(f)
-                #obj_class = value["__class__"]
-                #self.new(eval(obj_class)(**value))
         except:
+            reloaded_dict = {}
             pass
+        for key, reloaded_obj in reloaded_dict.items():
+            self.__objects[key] = BaseModel(**reloaded_obj)
