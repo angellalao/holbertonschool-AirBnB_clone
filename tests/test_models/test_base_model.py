@@ -6,7 +6,7 @@ class TestBaseModel(unittest.TestCase):
     """Tests for the BaseModel class"""
 
     def setUp(self):
-        """Test that class can be instatiated"""
+        """Test that class can be instantiated"""
         self.f1 = FileStorage()
         self.b1 = BaseModel()
         self.f1.new(self.b1)
