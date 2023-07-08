@@ -1,19 +1,19 @@
 import unittest
 from models.base_model import BaseModel
-#from models.engine.file_storage import FileStorage
+from models.engine.file_storage import FileStorage
 
 class TestBaseModel(unittest.TestCase):
     """Tests for the BaseModel class"""
 
     def setUp(self):
         """Test that class can be instantiated"""
-#        self.f1 = FileStorage()
+        self.f1 = FileStorage()
         self.b1 = BaseModel()
-#        self.f1.new(self.b1)
+        self.f1.new(self.b1)
 
-#    def tearDown(self):
-#        """Clean up after each test"""
-#        self.f1._FileStorage__objects.clear()
+    def tearDown(self):
+        """Clean up after each test"""
+        self.f1._FileStorage__objects.clear()
 
     def test_is_instance(self):
         """Test that an instance is of type BaseModel"""
@@ -41,6 +41,14 @@ class TestBaseModel(unittest.TestCase):
         self.b1.save()
         updated_at_time_after_save = self.b1.updated_at
         self.assertNotEqual(initial_updated_at_time, updated_at_time_after_save)
+
+    def test_save_updates_to_json_file(self):
+        """Test that save() updates the json file"""
+        self.b1.save()
+        self.b1_id = f"BaseModel.{self.b1.id}"
+        with open("file.json", "r") as f:
+            json_data = f.read()
+        self.assertIn(self.b1_id, json_data)
 
     def test_to_dict_makes_a_copy(self):
         """Test that to_dict makes copy"""
