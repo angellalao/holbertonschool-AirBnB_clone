@@ -66,11 +66,11 @@ changes into the JSON file). """
             key_to_del = str(args_list[0]) + "." + str(args_list[1])
             for k, v in obj_dict.items():
                 if k == key_to_del:
-                    del k
+                    del obj_dict[k]
                     storage.save()
                     return
             print("** no instance found **")
-            
+
     def do_all(self, args):
         """Prints all string representation of all instances based or not\
 on the class name(eg, all or all BaseModel)"""
@@ -89,8 +89,30 @@ on the class name(eg, all or all BaseModel)"""
         else:
             print("** class doesn't exist **")
 
-    def do_update():
-        pass
+    def do_update(self, args):
+        """Updates an instance based on the class name and id by adding or\
+updating attribute (saves the change into the JSON file) """
+        args_list = args.split(" ")
+        obj_dict = storage.all()
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args_list[0] != "BaseModel":
+            print("** class doesn't exist **")
+        elif len(args_list) == 1:
+            print("** instance id missing **")
+        elif len(args_list) == 2:
+            print("** attribute name missing **")
+        elif len(args_list) == 3:
+            print("** value missing **")
+        else:
+            id_to_update = args_list[1]
+            for value in obj_dict.values():
+                if value.__class__.__name__ == "BaseModel":
+                    if value.id == id_to_update:
+                        setattr(value, args_list[2], args_list[3])
+                        storage.save()
+                        return
+            print("** no instance found **")
 
 
 if __name__ == '__main__':
