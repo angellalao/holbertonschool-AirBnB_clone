@@ -32,5 +32,33 @@ file and prints the id\n"""
             new_instance.save()
             print(new_instance.id)
 
+    def do_show(self, args):
+        """Prints the string representation of an instance based on the class\
+ name and id\n """
+        args_list = args.split(" ")
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args_list[0] != "BaseModel":
+            print("** class doesn't exist **")
+        elif (len(args_list) < 2):
+            print("** instance id missing **")
+        else:
+            """not finished yet """
+            try:
+                print(self)
+            except:
+                print("** no instance found **")
+
+
+    def do_destroy():
+        pass
+    
+    def do_all():
+        pass
+    
+    def do_update():
+        pass
+
+    
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
