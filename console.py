@@ -51,9 +51,26 @@ file and prints the id\n"""
                     return
             print("** no instance found **")
 
-    def do_destroy():
-        pass
-
+    def do_destroy(self, args):
+        """ Deletes an instance based on the class name and id (saves the \
+changes into the JSON file).
+        args_list = args.split(" ")
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args_list[0] != "BaseModel":
+            print("** class doesn't exist **")
+        elif (len(args_list) < 2):
+            print("** instance id missing **")
+        else:
+            obj_dict = storage.all()
+            key_to_del = str(args_list[0]) + "." + str(args_list[1])
+            for k, v in obj_dict.items():
+                if k == key_to_del:
+                    del k
+                    storage.save()
+                    return
+            print("** no instance found **")
+            
     def do_all():
         pass
 
