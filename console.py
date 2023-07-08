@@ -25,13 +25,14 @@ class HBNBCommand(cmd.Cmd):
 file and prints the id\n"""
         if len(args) == 0:
             print("** class name missing **")
-        elif args != "BaseModel":\
+        elif args != "BaseModel":
             print("** class doesn't exist **")
         else:
             new_instance = BaseModel()
             new_instance.save()
             print(new_instance.id)
 
+<<<<<<< HEAD
     def do_show(self, args):
         """Prints the string representation of an instance based on the class\
  name and id\n """
@@ -60,5 +61,8 @@ file and prints the id\n"""
         pass
 
     
+=======
+
+>>>>>>> 14dffd93db0b5c293f28117113949b858ba8bb5f
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
