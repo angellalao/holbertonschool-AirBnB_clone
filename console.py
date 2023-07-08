@@ -53,7 +53,7 @@ file and prints the id\n"""
 
     def do_destroy(self, args):
         """ Deletes an instance based on the class name and id (saves the \
-changes into the JSON file).
+changes into the JSON file). """
         args_list = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
