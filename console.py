@@ -71,8 +71,23 @@ changes into the JSON file). """
                     return
             print("** no instance found **")
             
-    def do_all():
-        pass
+    def do_all(self, args):
+        """Prints all string representation of all instances based or not\
+on the class name(eg, all or all BaseModel)"""
+        args_list = args.split(" ")
+        obj_dict = storage.all()
+        new_list = []
+        if len(args) == 0:
+            for value in obj_dict.values():
+                new_list.append(value.__str__())
+            print(new_list)
+        elif args_list[0] == "BaseModel":
+            for value in obj_dict.values():
+                if value.__class__.__name__  == "BaseModel":
+                    new_list.append(value.__str__())
+            print(new_list)
+        else:
+            print("** class doesn't exist **")
 
     def do_update():
         pass
