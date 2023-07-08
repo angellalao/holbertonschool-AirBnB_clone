@@ -32,7 +32,6 @@ file and prints the id\n"""
             new_instance.save()
             print(new_instance.id)
 
-<<<<<<< HEAD
     def do_show(self, args):
         """Prints the string representation of an instance based on the class\
  name and id\n """
@@ -50,7 +49,6 @@ file and prints the id\n"""
             except:
                 print("** no instance found **")
 
-
     def do_destroy():
         pass
 
@@ -61,8 +59,5 @@ file and prints the id\n"""
         pass
 
 
-=======
-
->>>>>>> 14dffd93db0b5c293f28117113949b858ba8bb5f
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
