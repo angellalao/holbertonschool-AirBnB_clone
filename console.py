@@ -41,11 +41,11 @@ file and prints the id\n"""
         if args == "" or args is None:
             print("** class name missing **")
         else:
-            args_str = args.split(' ')
-            if args_str[0] not in class_dict.keys():
+            args_list = args.split(' ')
+            if args_list[0] not in class_dict.keys():
                 print("** class doesn't exist **")
             else:
-                new_instance = class_dict[args_str[0]]()
+                new_instance = class_dict[args_list[0]]()
                 new_instance.save()
                 print(new_instance.id)
 
@@ -55,7 +55,7 @@ file and prints the id\n"""
         args_list = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
-        elif args_list[0] != "BaseModel":
+        elif args_list[0] not in class_dict.keys():
             print("** class doesn't exist **")
         elif (len(args_list) < 2):
             print("** instance id missing **")
@@ -74,7 +74,7 @@ changes into the JSON file). """
         args_list = args.split(" ")
         if len(args) == 0:
             print("** class name missing **")
-        elif args_list[0] != "BaseModel":
+        elif args_list[0] not in class_dict.keys():
             print("** class doesn't exist **")
         elif (len(args_list) < 2):
             print("** instance id missing **")
@@ -98,9 +98,9 @@ on the class name(eg, all or all BaseModel)"""
             for value in obj_dict.values():
                 new_list.append(value.__str__())
             print(new_list)
-        elif args_list[0] == "BaseModel":
+        elif args_list[0] in class_dict.keys():
             for value in obj_dict.values():
-                if value.__class__.__name__  == "BaseModel":
+                if value.__class__.__name__ == class_dict[args_list[0]]():
                     new_list.append(value.__str__())
             print(new_list)
         else:
