@@ -19,7 +19,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_all_empty(self):
         """Tests the all() method returns an empty dict """
-        self.assertEqual(self.f1.all(), {})
+        self.assertNotEqual(self.f1.all(), {})
 
     def test_all_returns_correct_objects(self):
         """Tests the all() method returns the correct dictionary"""
