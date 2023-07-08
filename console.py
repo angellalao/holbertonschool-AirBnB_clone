@@ -3,7 +3,22 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
+class_dict = {
+    "Amenity": Amenity,
+    "BaseModel": BaseModel,
+    "City": City,
+    "Place": Place,
+    "Review": Review,
+    "State": State,
+    "User": User
+}
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
@@ -23,14 +38,16 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """Creates a new instance of BaseModel, saves it to a json\
 file and prints the id\n"""
-        if len(args) == 0:
+        if args == "" or args is None:
             print("** class name missing **")
-        elif args != "BaseModel":
-            print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
-            new_instance.save()
-            print(new_instance.id)
+            args_str = args.split(' ')
+            if args_str[0] not in class_dict.keys():
+                print("** class doesn't exist **")
+            else:
+                new_instance = class_dict[args_str[0]]()
+                new_instance.save()
+                print(new_instance.id)
 
     def do_show(self, args):
         """Prints the string representation of an instance based on the class\
@@ -70,7 +87,7 @@ changes into the JSON file). """
                     storage.save()
                     return
             print("** no instance found **")
-            
+
     def do_all(self, args):
         """Prints all string representation of all instances based or not\
 on the class name(eg, all or all BaseModel)"""
@@ -90,8 +107,29 @@ on the class name(eg, all or all BaseModel)"""
             print("** class doesn't exist **")
 
     def do_update():
+        """Updates an instance based on the class name and id by adding or\
+updating attribute (save the change into the JSON file)."""
         pass
+        """args_list = args.split(" ")
+        args_len = len(args_list)
+        msg_1 = "** class name missing **"
+        msg_2 = "** class doesn't exist **"
+        msg_3 = "** instance id missing **"
+        msg_4 = "** no instance found **"
+        msg_5 = "** attribute name missing **"
+        msg_6 = "** value missing **"
 
+        if args_len == 0:
+            print(msg_1)
+        elif args_list[0] != "BaseModel":
+            print(msg_2)
+        elif args_len == 1:
+            print(msg_3)
+        elif args_len == 2:
+            print(msg_5)
+        elif args_len == 3:
+            print(msg_6)
+        elif args_len > 3:"""
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
