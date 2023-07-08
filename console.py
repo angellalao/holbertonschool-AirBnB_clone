@@ -20,6 +20,7 @@ class_dict = {
     "User": User
 }
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
@@ -100,7 +101,7 @@ on the class name(eg, all or all BaseModel)"""
             print(new_list)
         elif args_list[0] in class_dict.keys():
             for value in obj_dict.values():
-                if value.__class__.__name__ == class_dict[args_list[0]]():
+                if value.__class__.__name__ == args_list[0]:
                     new_list.append(value.__str__())
             print(new_list)
         else:
@@ -113,7 +114,7 @@ updating attribute (saves the change into the JSON file) """
         obj_dict = storage.all()
         if len(args) == 0:
             print("** class name missing **")
-        elif args_list[0] != "BaseModel":
+        elif args_list[0] not in class_dict.keys():
             print("** class doesn't exist **")
         elif len(args_list) == 1:
             print("** instance id missing **")
@@ -124,12 +125,13 @@ updating attribute (saves the change into the JSON file) """
         else:
             id_to_update = args_list[1]
             for value in obj_dict.values():
-                if value.__class__.__name__ == "BaseModel":
+                if value.__class__.__name__ == args_list[0]:
                     if value.id == id_to_update:
                         setattr(value, args_list[2], args_list[3])
                         storage.save()
                         return
             print("** no instance found **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
