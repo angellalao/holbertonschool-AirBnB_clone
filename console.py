@@ -43,11 +43,13 @@ file and prints the id\n"""
         elif (len(args_list) < 2):
             print("** instance id missing **")
         else:
-            """not finished yet """
-            try:
-                print(self)
-            except:
-                print("** no instance found **")
+            obj_dict = storage.all()
+            new_key = str(args_list[0]) + "." + str(args_list[1])
+            for k, v in obj_dict.items():
+                if k == new_key:
+                    print(v)
+                    return
+            print("** no instance found **")
 
     def do_destroy():
         pass
