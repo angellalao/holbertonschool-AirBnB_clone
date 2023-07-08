@@ -83,7 +83,7 @@ changes into the JSON file). """
             key_to_del = str(args_list[0]) + "." + str(args_list[1])
             for k, v in obj_dict.items():
                 if k == key_to_del:
-                    del k
+                    del obj_dict[k]
                     storage.save()
                     return
             print("** no instance found **")
@@ -106,30 +106,30 @@ on the class name(eg, all or all BaseModel)"""
         else:
             print("** class doesn't exist **")
 
-    def do_update():
+    def do_update(self, args):
         """Updates an instance based on the class name and id by adding or\
-updating attribute (save the change into the JSON file)."""
-        pass
-        """args_list = args.split(" ")
-        args_len = len(args_list)
-        msg_1 = "** class name missing **"
-        msg_2 = "** class doesn't exist **"
-        msg_3 = "** instance id missing **"
-        msg_4 = "** no instance found **"
-        msg_5 = "** attribute name missing **"
-        msg_6 = "** value missing **"
-
-        if args_len == 0:
-            print(msg_1)
+updating attribute (saves the change into the JSON file) """
+        args_list = args.split(" ")
+        obj_dict = storage.all()
+        if len(args) == 0:
+            print("** class name missing **")
         elif args_list[0] != "BaseModel":
-            print(msg_2)
-        elif args_len == 1:
-            print(msg_3)
-        elif args_len == 2:
-            print(msg_5)
-        elif args_len == 3:
-            print(msg_6)
-        elif args_len > 3:"""
+            print("** class doesn't exist **")
+        elif len(args_list) == 1:
+            print("** instance id missing **")
+        elif len(args_list) == 2:
+            print("** attribute name missing **")
+        elif len(args_list) == 3:
+            print("** value missing **")
+        else:
+            id_to_update = args_list[1]
+            for value in obj_dict.values():
+                if value.__class__.__name__ == "BaseModel":
+                    if value.id == id_to_update:
+                        setattr(value, args_list[2], args_list[3])
+                        storage.save()
+                        return
+            print("** no instance found **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
