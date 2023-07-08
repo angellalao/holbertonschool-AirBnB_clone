@@ -53,14 +53,14 @@ file and prints the id\n"""
 
     def do_destroy():
         pass
-    
+
     def do_all():
         pass
-    
+
     def do_update():
         pass
 
-    
+
 =======
 
 >>>>>>> 14dffd93db0b5c293f28117113949b858ba8bb5f
