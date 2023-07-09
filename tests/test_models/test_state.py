@@ -11,3 +11,7 @@ class TestState(unittest.TestCase):
     def test_is_instance(self):
         """Test that an instance is of type State"""
         self.assertIsInstance(self.s1, State)
+
+    def test_name_attribute_exist(self):
+        """Test that the name attribute exists"""
+        self.assertEqual(self.s1.name, "")
