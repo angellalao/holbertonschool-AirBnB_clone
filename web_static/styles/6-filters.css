@@ -58,6 +58,7 @@ li + li {
     width: 25%;
     border-right: 1px solid #DDDDDD;
     margin-left: 50px;
+    z-index: 1;
 }
 
 .locations .popover {

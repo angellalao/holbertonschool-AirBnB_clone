@@ -1,3 +1,10 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  list-style: none;
+}
+
 body {
     margin: 0; 
     padding: 0;
