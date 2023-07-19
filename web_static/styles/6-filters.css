@@ -74,6 +74,7 @@ li + li {
     height: 100%;
     width: 25%;
     margin-left: 50px;
+    z-index: 1;
 }
 
 .amenities .popover {
